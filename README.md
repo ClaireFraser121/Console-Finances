@@ -48,7 +48,7 @@ nalyzing the financial records of a company. You have been provided with a finan
 
 ## Credits
 
-- [Your Name](your-github-profile-link) - Student and Developer
+- [Claire Fraser](https://github.com/ClaireFraser121) - Student and Developer
 - [Financial Dataset](link-to-source) - Provided financial dataset
 
 I'd like to express my gratitude to the following resources and creators that helped me on my journey to complete this project:
