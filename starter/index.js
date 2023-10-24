@@ -97,8 +97,10 @@ var greatestDecrease = { amount: 0 };
 var previousMonthProfitLoss = finances[0][1];
 var totalChange = 0;
 
-// Initialize variables for calculating average change
-var previousMonthProfitLoss = finances[0][1];
-var totalChange = 0;
+// Loop through the financial records
+for (var i = 0; i < finances.length; i++) {
+  var month = finances[i][0];
+  var profitLoss = finances[i][1];
+
 
 
