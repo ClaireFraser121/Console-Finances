@@ -88,52 +88,98 @@ var finances = [
 ];
 
 // Initialize variables to store the results
-var totalMonths = finances.length; // Store the total number of months
-var total = 0; // Initialize a variable to store the total profit/loss
-var change = 0; // Initialize a variable to store the change in profit/loss
-var avg; // Initialize a variable for the average change
-var analysis; // Initialize a variable to store the analysis summary
-var netProfit = 0; // Initialize a variable to store net profit
-var netArray = []; // Initialize an array to store the changes
-var changeSum = 0; // Initialize a variable to store the sum of changes
-var least = ['', 999999999]; // Initialize an array to store the month with the least change
-var greatest = ['', 0]; // Initialize an array to store the month with the greatest change
+var totalMonths = finances.length;
+var total = 0;
+var change = 0;
+var avg;
+var analysis;
+var netProfit = 0;
+var netArray = [];
+var changeSum = 0;
+var least = ['', 99999999];
+var greatest = ['', 0];
 
 // Initialize variables for calculating average change
-var previousMonthProfitLoss = finances[0][1]; // Initialize the previous month's profit/loss
-var totalChange = 0; // Initialize a variable to store the total change
+var previousMonthProfitLoss = finances[0][1];
+var totalChange = 0;
 
 // Loop through the financial records
 for (var i = 0; i < finances.length; i++) {
   for (var c = 0; c < finances[i].length; c++) {
-    if (typeof finances[i][c] !== 'string') { // Check if the element is not a string
-      total += finances[i][c]; // Add the profit/loss to the total
-      change = finances[i][c] - netProfit; // Calculate the change
-      netProfit = finances[i][c]; // Update the net profit
-      netArray.push(change); // Add the change to the array
+    if (typeof finances[i][c] !== 'string'){
+      total += finances[i][c]
+      change = finances[i][c] - netProfit
+      net = finances[i][c];
+      netArray.push(change);
 
-      if (change < least[1]) {
-        least = [finances[i][0], finances[i][1]]; // Update the least change
+      if (change< least[1]){
+        least = [finances[i][0], finances[i][1]]
       }
 
-      if (change > greatest[1]) {
-        greatest = [finances[i][0], finances[i][1]]; // Update the greatest change
+      if (change> greatest[1]){
+        greatest = [finances[i][0], finances[i][1]]
       }
     }
   }
 }
 
-for (var i = 0; i < netArray.length; i++) {
-  changeSum += netArray[i]; // Calculate the sum of changes
+for (var i = 0; i < netArray.length; i++){
+  changeSum += netArray[i]
 }
-avg = Math.round((changeSum / 86) * 100) / 100; // Calculate the average change
+avg = Math.round ((changeSum / 86)*100)/100
+  // var month = finances[i][0];
+  // var profitLoss = finances[i][1];
+analysis = 'Financial Analysis ' + '\n' + 
+'----------------' + '\n' + 
+'Total Months: ' + totalMonths + '\n' + 
+'Total: $' + total + '\n' + 
+'Average Change: ' + avg + '\n' + 
+'Greatest Increase: ' + greatest[0] + ': $' + greatest[1] + '\n' + 
+'Greatest Decrease: ' + least[0] + ': $' + least[1];
 
-analysis = 'Financial Analysis ' + '\n' +
-  '----------------' + '\n' +
-  'Total Months: ' + totalMonths + '\n' +
-  'Total: $' + total + '\n' +
-  'Average Change: ' + avg + '\n' +
-  'Greatest Increase: ' + greatest[0] + ': $' + greatest[1] + '\n' +
-  'Greatest Decrease: ' + least[0] + ': $' + least[1];
+console.log(analysis);
 
-console.log(analysis); // Display the financial analysis
+//   // Calculate the total Profit/Losses
+//   totalProfitLoss += profitLoss;
+
+//   // Calculate the change in Profit/Losses and add it to the total change
+//   var change = profitLoss - previousMonthProfitLoss;
+//   totalChange += change;
+
+//   // Check for the greatest increase and decrease
+//   if (change > least.amount) {
+//     least.amount = change;
+//     least.date = month;
+//   } else if (change < greatest.amount) {
+//     greatest.amount = change;
+//     greatest.date = month;
+//   }
+
+//   // Update the previous month's Profit/Loss value for the next iteration
+//   previousMonthProfitLoss = profitLoss;
+// }
+
+// // Calculate the average change
+// var averageChange = totalChange / (totalMonths - 1);
+
+// // Print the financial analysis
+// console.log("Financial Analysis");
+// console.log("----------------------------");
+// console.log("Total Months: " + totalMonths);
+// console.log("Total: $" + totalProfitLoss);
+// console.log("Average Change: $" + averageChange.toFixed(2));
+// console.log(
+//   "Greatest Increase in Profits/Losses: " +
+//     least.date +
+//     " ($" +
+//     least.amount +
+//     ")"
+// );
+// console.log(
+//   "Greatest Decrease in Profits/Losses: " +
+//     greatest.date +
+//     " ($" +
+//     greatest.amount +
+//     ")"
+// );
+// }
