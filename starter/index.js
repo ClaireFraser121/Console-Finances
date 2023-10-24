@@ -89,17 +89,15 @@ var finances = [
 
 // Initialize variables to store the results
 var totalMonths = finances.length;
-var totalProfitLoss = 0;
+var total = 0;
 var change = 0;
 var avg;
 var analysis;
 var netProfit = 0;
 var netArray = [];
 var changeSum = 0;
-var leastChange = ['', 99999999];
-var mostChange = ['', 0];
-var greatestIncrease = { amount: 0 };
-var greatestDecrease = { amount: 0 };
+var least = ['', 99999999];
+var greatest = ['', 0];
 
 // Initialize variables for calculating average change
 var previousMonthProfitLoss = finances[0][1];
@@ -107,50 +105,81 @@ var totalChange = 0;
 
 // Loop through the financial records
 for (var i = 0; i < finances.length; i++) {
-  
-  var month = finances[i][0];
-  var profitLoss = finances[i][1];
+  for (var c = 0; c < finances[i].length; c++) {
+    if (typeof finances[i][c] !== 'string'){
+      total += finances[i][c]
+      change = finances[i][c] - netProfit
+      net = finances[i][c];
+      netArray.push(change);
 
-  // Calculate the total Profit/Losses
-  totalProfitLoss += profitLoss;
+      if (change< least[1]){
+        least = [finances[i][0], finances[i][1]]
+      }
 
-  // Calculate the change in Profit/Losses and add it to the total change
-  var change = profitLoss - previousMonthProfitLoss;
-  totalChange += change;
-
-  // Check for the greatest increase and decrease
-  if (change > greatestIncrease.amount) {
-    greatestIncrease.amount = change;
-    greatestIncrease.date = month;
-  } else if (change < greatestDecrease.amount) {
-    greatestDecrease.amount = change;
-    greatestDecrease.date = month;
+      if (change> greatest[1]){
+        greatest = [finances[i][0], finances[i][1]]
+      }
+    }
   }
-
-  // Update the previous month's Profit/Loss value for the next iteration
-  previousMonthProfitLoss = profitLoss;
 }
 
-// Calculate the average change
-var averageChange = totalChange / (totalMonths - 1);
+for (var i = 0; i < netArray.length; i++){
+  changeSum += netArray[i]
+}
+avg = Math.round ((changeSum / 86)*100)/100
+  // var month = finances[i][0];
+  // var profitLoss = finances[i][1];
+analysis = 'Financial Analysis ' + '\n' + 
+'----------------' + '\n' + 
+'Total Months: ' + totalMonths + '\n' + 
+'Total: $' + total + '\n' + 
+'Average Change: ' + avg + '\n' + 
+'Greatest Increase: ' + greatest[0] + ': $' + greatest[1] + '\n' + 
+'Greatest Decrease: ' + least[0] + ': $' + least[1];
 
-// Print the financial analysis
-console.log("Financial Analysis");
-console.log("----------------------------");
-console.log("Total Months: " + totalMonths);
-console.log("Total: $" + totalProfitLoss);
-console.log("Average Change: $" + averageChange.toFixed(2));
-console.log(
-  "Greatest Increase in Profits/Losses: " +
-    greatestIncrease.date +
-    " ($" +
-    greatestIncrease.amount +
-    ")"
-);
-console.log(
-  "Greatest Decrease in Profits/Losses: " +
-    greatestDecrease.date +
-    " ($" +
-    greatestDecrease.amount +
-    ")"
-);
+console.log(analysis);
+
+//   // Calculate the total Profit/Losses
+//   totalProfitLoss += profitLoss;
+
+//   // Calculate the change in Profit/Losses and add it to the total change
+//   var change = profitLoss - previousMonthProfitLoss;
+//   totalChange += change;
+
+//   // Check for the greatest increase and decrease
+//   if (change > least.amount) {
+//     least.amount = change;
+//     least.date = month;
+//   } else if (change < greatest.amount) {
+//     greatest.amount = change;
+//     greatest.date = month;
+//   }
+
+//   // Update the previous month's Profit/Loss value for the next iteration
+//   previousMonthProfitLoss = profitLoss;
+// }
+
+// // Calculate the average change
+// var averageChange = totalChange / (totalMonths - 1);
+
+// // Print the financial analysis
+// console.log("Financial Analysis");
+// console.log("----------------------------");
+// console.log("Total Months: " + totalMonths);
+// console.log("Total: $" + totalProfitLoss);
+// console.log("Average Change: $" + averageChange.toFixed(2));
+// console.log(
+//   "Greatest Increase in Profits/Losses: " +
+//     least.date +
+//     " ($" +
+//     least.amount +
+//     ")"
+// );
+// console.log(
+//   "Greatest Decrease in Profits/Losses: " +
+//     greatest.date +
+//     " ($" +
+//     greatest.amount +
+//     ")"
+// );
+// }
