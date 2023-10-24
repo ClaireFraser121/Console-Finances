@@ -105,6 +105,9 @@ for (var i = 0; i < finances.length; i++) {
   // Calculate the total Profit/Losses
   totalProfitLoss += profitLoss;
 
+  // Calculate the change in Profit/Losses and add it to the total change
+  var change = profitLoss - previousMonthProfitLoss;
+  totalChange += change;
 
 
 
