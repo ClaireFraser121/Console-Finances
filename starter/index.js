@@ -109,5 +109,15 @@ for (var i = 0; i < finances.length; i++) {
   var change = profitLoss - previousMonthProfitLoss;
   totalChange += change;
 
+    // Check for the greatest increase and decrease
+    if (change > greatestIncrease.amount) {
+      greatestIncrease.amount = change;
+      greatestIncrease.date = month;
+    } else if (change < greatestDecrease.amount) {
+      greatestDecrease.amount = change;
+      greatestDecrease.date = month;
+    }
+  
+
 
 
