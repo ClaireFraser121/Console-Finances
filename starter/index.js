@@ -102,5 +102,9 @@ for (var i = 0; i < finances.length; i++) {
   var month = finances[i][0];
   var profitLoss = finances[i][1];
 
+  // Calculate the total Profit/Losses
+  totalProfitLoss += profitLoss;
+
+
 
 
