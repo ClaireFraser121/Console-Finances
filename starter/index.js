@@ -121,3 +121,27 @@ for (var i = 0; i < finances.length; i++) {
   // Update the previous month's Profit/Loss value for the next iteration
   previousMonthProfitLoss = profitLoss;
 }
+
+// Calculate the average change
+var averageChange = totalChange / (totalMonths - 1);
+
+// Print the financial analysis
+console.log("Financial Analysis");
+console.log("----------------------------");
+console.log("Total Months: " + totalMonths);
+console.log("Total: $" + totalProfitLoss);
+console.log("Average Change: $" + averageChange.toFixed(2));
+console.log(
+  "Greatest Increase in Profits/Losses: " +
+    greatestIncrease.date +
+    " ($" +
+    greatestIncrease.amount +
+    ")"
+);
+console.log(
+  "Greatest Decrease in Profits/Losses: " +
+    greatestDecrease.date +
+    " ($" +
+    greatestDecrease.amount +
+    ")"
+);
