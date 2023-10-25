@@ -90,50 +90,60 @@ var finances = [
 // Initialize variables to store the results
 var totalMonths = finances.length; // Store the total number of months
 var total = 0; // Initialize a variable to store the total profit/loss
-var change = 0; // Initialize a variable to store the change in profit/loss
-var avg; // Initialize a variable for the average change
-var analysis; // Initialize a variable to store the analysis summary
-var netProfit = 0; // Initialize a variable to store net profit
-var netArray = []; // Initialize an array to store the changes
-var changeSum = 0; // Initialize a variable to store the sum of changes
-var least = ['', 999999999]; // Initialize an array to store the month with the least change
-var greatest = ['', 0]; // Initialize an array to store the month with the greatest change
+var changes = []; // Initialize an array to store changes in profit/loss
+var greatestIncrease = { date: '', amount: -Infinity }; // Initialize the greatest increase
+var greatestDecrease = { date: '', amount: Infinity }; // Initialize the greatest decrease
 
-// Initialize variables for calculating average change
-var previousMonthProfitLoss = finances[0][1]; // Initialize the previous month's profit/loss
-var totalChange = 0; // Initialize a variable to store the total change
+// Initialize a variable to keep track of the previous month's profit/loss
+var previousProfitLoss = finances[0][1];
 
 // Loop through the financial records
-for (var i = 0; i < finances.length; i++) {
-  for (var c = 0; c < finances[i].length; c++) {
-    if (typeof finances[i][c] !== 'string') { // Check if the element is not a string
-      total += finances[i][c]; // Add the profit/loss to the total
-      change = finances[i][c] - netProfit; // Calculate the change
-      netProfit = finances[i][c]; // Update the net profit
-      netArray.push(change); // Add the change to the array
+for (var i = 0; i < totalMonths; i++) {
+  // Get the data for the current month
+  var monthData = finances[i];
+  var date = monthData[0];
+  var profitLoss = monthData[1];
 
-      if (change < least[1]) {
-        least = [finances[i][0], finances[i][1]]; // Update the least change
-      }
+  // Calculate the total profit/loss
+  total += profitLoss;
 
-      if (change > greatest[1]) {
-        greatest = [finances[i][0], finances[i][1]]; // Update the greatest change
-      }
+  if (i > 0) {
+    // Calculate the change in profit/loss compared to the previous month
+    var change = profitLoss - previousProfitLoss;
+    changes.push(change);
+
+    // Update the greatest increase and decrease if needed
+    if (change > greatestIncrease.amount) {
+      greatestIncrease.date = date;
+      greatestIncrease.amount = change;
+    }
+
+    if (change < greatestDecrease.amount) {
+      greatestDecrease.date = date;
+      greatestDecrease.amount = change;
     }
   }
+
+  // Update the previous month's profit/loss for the next iteration
+  previousProfitLoss = profitLoss;
 }
 
-for (var i = 0; i < netArray.length; i++) {
-  changeSum += netArray[i]; // Calculate the sum of changes
+// Calculate the total change in profit/loss
+var totalChange = 0;
+for (var j = 0; j < changes.length; j++) {
+  totalChange += changes[j];
 }
-avg = Math.round((changeSum / 86) * 100) / 100; // Calculate the average change
 
-analysis = 'Financial Analysis ' + '\n' +
+// Calculate the average change and format it to two decimal places
+var averageChange = (totalChange / (totalMonths - 1)).toFixed(2);
+
+// Prepare and display the financial analysis
+var analysis = 'Financial Analysis ' + '\n' +
   '----------------' + '\n' +
   'Total Months: ' + totalMonths + '\n' +
   'Total: $' + total + '\n' +
-  'Average Change: ' + avg + '\n' +
-  'Greatest Increase: ' + greatest[0] + ': $' + greatest[1] + '\n' +
-  'Greatest Decrease: ' + least[0] + ': $' + least[1];
+  'Average Change: $' + averageChange + '\n' +  // Display average with two decimal places
+  'Greatest Increase: ' + greatestIncrease.date + ': $' + greatestIncrease.amount + '\n' +
+  'Greatest Decrease: ' + greatestDecrease.date + ': $' + greatestDecrease.amount;
 
 console.log(analysis); // Display the financial analysis
