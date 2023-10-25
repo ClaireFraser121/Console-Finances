@@ -34,7 +34,7 @@ To see the results of my analysis, I ran the code in a JavaScript environment li
 
 For a glimpse of what my output might look like, here's a sample screenshot:
 
-![Example Output](/path/to/screenshot.png)
+![Example Output](/assets/Images/seeTheMagic.png)
 
 ## License
 
@@ -49,7 +49,6 @@ nalyzing the financial records of a company. You have been provided with a finan
 ## Credits
 
 - [Claire Fraser](https://github.com/ClaireFraser121) - Student and Developer
-- [Financial Dataset](link-to-source) - Provided financial dataset
 
 I'd like to express my gratitude to the following resources and creators that helped me on my journey to complete this project:
 
