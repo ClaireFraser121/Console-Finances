@@ -143,7 +143,7 @@ var analysis = 'Financial Analysis ' + '\n' +
   'Total Months: ' + totalMonths + '\n' +
   'Total: $' + total + '\n' +
   'Average Change: $' + averageChange + '\n' +  // Display average with two decimal places
-  'Greatest Increase: ' + greatestIncrease.date + ': $' + greatestIncrease.amount + '\n' +
-  'Greatest Decrease: ' + greatestDecrease.date + ': $' + greatestDecrease.amount;
+  'Greatest Increase in Profits/Losses: ' + greatestIncrease.date + ': $' + greatestIncrease.amount + '\n' +
+  'Greatest Decrease in Profits/Losses: ' + greatestDecrease.date + ': $' + greatestDecrease.amount;
 
 console.log(analysis); // Display the financial analysis
